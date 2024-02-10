@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'wsmandadero',
     'vehicle',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'pbackmande.urls'
@@ -148,3 +150,13 @@ REST_FRAMEWORK = {
  }
 
 AUTH_PROFILE_MODULE = 'webservice.Profile'
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    # Lista de dominios permitidos. Por ejemplo:
+    'localhost',
+    'http://127.0.0.1/',
+]
