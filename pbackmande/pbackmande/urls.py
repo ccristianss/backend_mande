@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from servicios.models import *
+from servicios.views import *
 from document.models import *
 from document.views import *
 from wsmandadero.models import *
@@ -27,6 +29,7 @@ router = routers.DefaultRouter()
 router.register(r'document', view_document)
 router.register(r'account_user', account_user_viewset)
 router.register(r'mandadero', mandadero_viewset)
+router.register(r'servicios', servicios_viewset)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
