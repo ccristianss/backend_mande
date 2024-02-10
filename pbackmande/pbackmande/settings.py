@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'pbackmande.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'servicios',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT':'3306',
+        'NAME': 'dbmanders',
+        'USER': 'mandaderos2024',
+        'PASSWORD': 'Manders2020**',
+        'HOST': 'dbmanders.database.windows.net',
+        'PORT':'1433',
     },
     #"default": {
     #    "ENGINE": "django.db.backends.postgresql",
