@@ -40,5 +40,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
-    path('docs/', include_docs_urls(title='documentation of Api'))
+    path('docs/', include_docs_urls(title='Documentacion de Mandaderos'))
 ]
