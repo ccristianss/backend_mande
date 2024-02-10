@@ -82,22 +82,22 @@ WSGI_APPLICATION = 'pbackmande.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.mysql',
-    #    'NAME': 'servicios',
-    #    'USER': 'root',
-    #    'PASSWORD': '',
-    #    'HOST': '127.0.0.1',
-    #    'PORT':'3306',
-    #},
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "dbmanders",
-        "USER": "iovwkaaltg",
-        "PASSWORD": "852XS077342KV108$",
-        "HOST": "backmanders",
-        "PORT": "",
-    }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'servicios',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT':'3306',
+    },
+    #"default": {
+    #    "ENGINE": "django.db.backends.postgresql",
+    #    "NAME": "dbmanders",
+    #    "USER": "iovwkaaltg",
+    #    "PASSWORD": "852XS077342KV108$",
+    #    "HOST": "backmanders",
+    #    "PORT": "",
+    #}
 }
 
 #
