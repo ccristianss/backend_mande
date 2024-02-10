@@ -95,8 +95,9 @@ DATABASES = {
         "NAME": "dbmanders",
         "USER": "iovwkaaltg",
         "PASSWORD": "852XS077342KV108$",
-        "HOST": "backmanders",
-        "PORT": "",
+        "HOST": "backmanders.postgres.database.azure.com",
+        "PORT": "5432",
+        
     }
 }
 
