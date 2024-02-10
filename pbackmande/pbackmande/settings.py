@@ -157,6 +157,5 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     # Lista de dominios permitidos. Por ejemplo:
-    'localhost',
-    'http://127.0.0.1/',
+    
 ]
