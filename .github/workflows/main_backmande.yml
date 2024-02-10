@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - backmande
 on:
   push:
     branches:
-      - main
+      - azure
   workflow_dispatch:
 
 jobs:
