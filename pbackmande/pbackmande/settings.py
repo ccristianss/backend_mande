@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'coreapi',
     'servicios',
     'document',
     'rest_framework',
     'wsmandadero',
+    'vehicle',
 ]
 
 MIDDLEWARE = [
@@ -140,5 +142,9 @@ MEDIA_ROOT = 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Identify User profile
+REST_FRAMEWORK = {
+'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+
+ }
 
 AUTH_PROFILE_MODULE = 'webservice.Profile'
