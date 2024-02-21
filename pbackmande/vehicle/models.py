@@ -8,7 +8,6 @@ class Vehicle(models.Model):
     plate_vehicle = models.CharField(max_length=10)
     model_vehicle = models.DateField(max_length= 4)  # Cambiado a DateField para seleccionar el año
     color_vehicle = models.CharField(max_length=10, validators=[RegexValidator(r'^[a-zA-Z]+$',
-                                                                              message='El color solo puede contener letras.')])
     VEHICLE_TYPES = [
         ('Automovil', 'tipo de vehiculo'),
         ('Automovil', 'Automovil'),

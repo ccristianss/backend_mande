@@ -30,15 +30,16 @@ from vehicle.models import *
 
 router = routers.DefaultRouter()
 router.register(r'document', view_document)
-router.register(r'account_user', account_user_viewset)
-router.register(r'mandadero', mandadero_viewset)
-router.register(r'servicios', servicios_viewset)
+router.register(r'account', account_user_viewset)
+router.register(r'mander', mandadero_viewset)
+router.register(r'service', servicios_viewset)
 router.register(r'vehicle', views_vehicle)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api2/', include('version2.urls')),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
     path('docs/', include_docs_urls(title='Documentacion de Mandaderos'))
 ]
