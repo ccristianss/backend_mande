@@ -38,23 +38,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'coreapi',
-    'servicios',
-    'document',
     'rest_framework',
     'wsmandadero',
-    'vehicle',
     'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'pbackmande.urls'
@@ -84,7 +82,7 @@ WSGI_APPLICATION = 'pbackmande.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'servicios',
+        'NAME': 'dbmandaderoapp',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
@@ -137,7 +135,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 # STATIC_ROOT = 'static'
 
 STATICFILES_DIRS = [
@@ -145,7 +143,7 @@ STATICFILES_DIRS = [
     "/var/www/static/",
 ]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 
 # Default primary key field type
@@ -159,13 +157,10 @@ REST_FRAMEWORK = {
 
  }
 
-AUTH_PROFILE_MODULE = 'webservice.Profile'
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = [
-    # Lista de dominios permitidos. Por ejemplo:
-    
-]
+

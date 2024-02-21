@@ -1,39 +1,166 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
+
 # Create your models here.
 
-class Account_User(models.Model):
-    id_Acount_User            = models.AutoField(primary_key=True)
-    email_Account_User        = models.EmailField(max_length=45, unique=True)
-    password_Account_User     = models.CharField(max_length=255)
-    dateregister_Account_User = models.DateField(auto_now_add=True)
-    dateupdate_Account_User   = models.DateField(auto_now=True)
-    isadmin_Acount_User       = models.BooleanField(default=False)
+class Account(models.Model):
+    id_account           = models.AutoField(primary_key=True)
+    email_account        = models.CharField(max_length=45, unique=True)
+    password_account     = models.CharField(max_length=255)
+    dateregister_account = models.DateTimeField(auto_now_add=True)
+    dateupdate_account   = models.DateTimeField(auto_now=True)
+    isadmin_account      = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         
-        if not self.password_Account_User.startswith(('pbkdf2_sha256$', 'bcrypt$', 'argon2$')):
-            self.password_Account_User = make_password(self.password_Account_User)
+        if not self.password_account.startswith(('pbkdf2_sha256$', 'bcrypt$', 'argon2$')):
+            self.password_account = make_password(self.password_account)
         super().save(*args, **kwargs)
    
     def __str__(self):
-        return self.email_Account_User
+        return self.email_account
+    class Meta:
+        db_table = 'account'
     
-class Mandadero(models.Model):
-    id_Mandadero              = models.AutoField(primary_key=True)
-    id_Account_User_Mandadero = models.ForeignKey('Account_User', on_delete=models.CASCADE)
-    name_Mandadero            = models.CharField(max_length=45)
-    lastName_Mandadero        = models.CharField(max_length=45)
-    phone_Mandadero           = models.CharField(max_length=10)
-    image_Mandadero           = models.ImageField (upload_to='imgMandadero',max_length=255)
-    ishavecar_Mandadero       = models.BooleanField()
-    ishavemoto_Mandadero      = models.BooleanField()
-    isactive_Mandadero        = models.BooleanField(default=True)
-    isvalidate_Mandadero      = models.BooleanField(default=True)
-    dateregister_Mandadero    = models.DateTimeField(auto_now_add=True)
-    dateupdate_Mandadero      = models.DateTimeField(auto_now=True)
-    address_Mandadero         = models.CharField(max_length=100)
-    cc_Mandadero              = models.CharField(max_length=13)
 
-    def __str__(self) -> str:
-        return self.name_Mandadero
+
+
+class User(models.Model):
+    id_user            = models.AutoField(primary_key=True)
+    account_id_account = models.ForeignKey('Account', on_delete=models.CASCADE)
+    image_user         = models.ImageField(upload_to='imgProfiles', null=True, blank=True)
+    name_user          = models.CharField(max_length=45)
+    lastname_user      = models.CharField(max_length=45)
+    phone_user         = models.CharField(max_length=10)
+    dateregister_user  = models.DateTimeField(auto_now_add=True)
+    dateupdate_user    = models.DateTimeField(auto_now=True)
+    ismander_user      = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name_user
+    class Meta:
+        db_table = 'user'
+
+
+class Document(models.Model):
+    id_document         = models.AutoField(primary_key=True)
+    user_id_user = models.ForeignKey('User', on_delete=models.CASCADE)
+    image_document      = models.ImageField(upload_to='imgDocs',max_length=255)
+    isdocument_vehicle  = models.BooleanField()
+    isverified_document = models.BooleanField()
+
+    DOCUMENT_TYPES = [
+        ('CC', 'Cédula de Ciudadanía'),
+        ('SOAT', 'SOAT'),
+        ('LICENCIA', 'Licencia'),
+        ('OPERACION', 'Operación'),
+        ('TECNOMECANICA', 'Tecnomecánica'),
+        ('RECIBO', 'Recibo'),
+    ]
+
+    type_document = models.CharField(max_length=15, choices=DOCUMENT_TYPES)
+
+    dateregister_document = models.DateTimeField(auto_now_add=True)
+    dateupdate_document   = models.DateTimeField(auto_now=True)
+    dateverified_document = models.DateTimeField(null=True)
+
+    class Meta:
+        db_table = 'document'
+
+
+class Mander(models.Model):
+    id_mander           = models.AutoField(primary_key=True)
+    user_id_user        = models.ForeignKey('User', on_delete=models.CASCADE)
+    image_mander        = models.ImageField (upload_to='imgMander',max_length=255, null=False)
+    ishavecar_mander    = models.BooleanField()
+    ishavemoto_mander   = models.BooleanField()
+    isactive_mander     = models.BooleanField()
+    isvalidate_mander   = models.BooleanField(default=False)
+    dateregister_mander = models.DateTimeField(auto_now_add=True)
+    dateupdate_mander   = models.DateTimeField(auto_now=True)
+    address_mander      = models.CharField(max_length=100)
+    cc_mander           = models.CharField(max_length=13)
+
+    class Meta:
+        db_table = 'mander'
+
+class Service(models.Model):
+    id_service     = models.AutoField(primary_key=True)
+    name_service   = models.CharField(max_length=45)
+    detail_service = models.CharField(max_length=255)
+    image_service  = models.ImageField(upload_to='imgService',max_length=255)
+
+    def __str__(self):
+        return self.name_service
+    
+    class Meta:
+        db_table = 'service'
+
+class Request(models.Model):
+    id_request         = models.AutoField(primary_key=True)
+    service_id_service = models.ForeignKey('Service', on_delete=models.CASCADE)
+    user_id_user       = models.ForeignKey('User', on_delete=models.CASCADE)
+    detail_request     = models.CharField(max_length=255)
+
+    STATUS_CHOICES = [
+        ('Pendiente', 'Pendiente'),
+        ('Proceso', 'Proceso'),
+        ('Finalizado', 'Finalizado'),
+    ]
+
+    status_request       = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pendiente')
+
+    dateregister_request = models.DateTimeField(auto_now_add=True)
+    dateupdate_request   = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'Request {self.id_request}: {self.detail_request}'
+    
+    class Meta:
+        db_table = 'request'
+
+class Requestmanager(models.Model):
+    id_requestmanager    = models.AutoField(primary_key=True)
+    request_id_request   = models.ForeignKey('Request', on_delete=models.CASCADE)
+    image_requestmanager = models.ImageField(upload_to='imgRequestmanager',max_length=255,null=True,blank=True)
+    mander_id_mander     = models.ForeignKey('Mander', on_delete=models.CASCADE, null=True)
+
+    STATUS_CHOICES = [
+        ('espera', 'En espera'),
+        ('proceso', 'En proceso'),
+        ('terminado', 'Terminado'),
+    ]
+    status_requestmanager       = models.CharField(max_length=10, choices=STATUS_CHOICES)
+
+    detail_requestmanager       = models.CharField(max_length=45)
+    dateregister_requestmanager = models.DateTimeField(auto_now_add=True)
+    dateupdate_requestmanager   = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'requestmanager'
+
+
+class Vehicle(models.Model):
+    id_vehicle          = models.AutoField(primary_key=True)
+    user_id_user = models.ForeignKey('User', on_delete=models.CASCADE)
+    image_vehicle       = models.ImageField(upload_to='imgVehicles', max_length=255, null=False)
+    brand_vehicle       = models.CharField(max_length=20)
+    plate_vehicle       = models.CharField(max_length=10)
+    model_vehicle       = models.SmallIntegerField()
+    color_vehicle       = models.CharField(max_length=45)
+
+    VEHICLE_TYPE_CHOICES = [
+        ('none', 'None'),
+        ('bicycle', 'Bicycle'),
+        ('bike', 'Motorcycle'),
+        ('car', 'Car'),
+    ]
+    type_vehicle         = models.CharField(max_length=10, choices=VEHICLE_TYPE_CHOICES)
+
+    isverified_vehicle   = models.BooleanField(default=False)
+    dateregister_vehicle = models.DateTimeField(auto_now_add=True)
+    dateupdate_vehicle   = models.DateTimeField(auto_now=True)
+    dateverified_vehicle = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'vehicle'
