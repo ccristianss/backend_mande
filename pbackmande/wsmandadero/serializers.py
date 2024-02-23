@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Account, User, Document, Mander, Service, Request, Requestmanager, Vehicle
+from .models import *
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,7 +7,6 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
-    account = AccountSerializer()
     
     class Meta:
         model = User
