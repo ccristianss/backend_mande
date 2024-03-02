@@ -12,3 +12,10 @@ def update_request_status(sender, instance, created, **kwargs):
         # Actualizar el status_request a 'Proceso'
         related_request.status_request = 'Proceso'
         related_request.save()
+        
+    if instance.status_requestmanager == 'terminado':
+        # Obtener el objeto Request relacionado
+        request_instance = instance.request_id_request
+        # Actualizar el campo status_request a 'Finalizado'
+        request_instance.status_request = 'Finalizado'
+        request_instance.save()
