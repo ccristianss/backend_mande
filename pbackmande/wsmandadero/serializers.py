@@ -7,10 +7,17 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
+
+    account_id_account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), allow_null=True)
     
     class Meta:
         model = User
         fields = '__all__'
+        depth=2
+
+        
+        
+    
 
 class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
