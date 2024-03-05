@@ -27,7 +27,7 @@ class Account(models.Model):
 
 class User(models.Model):
     id_user            = models.AutoField(primary_key=True)
-    account_id_account = models.ForeignKey('Account', on_delete=models.CASCADE, unique=True)
+    account_id_account = models.ForeignKey('Account', on_delete=models.PROTECT, unique=True)
     image_user         = models.ImageField(upload_to='imgProfiles', null=True, blank=True)
     name_user          = models.CharField(max_length=45)
     lastname_user      = models.CharField(max_length=45)
@@ -44,7 +44,7 @@ class User(models.Model):
 
 class Document(models.Model):
     id_document         = models.AutoField(primary_key=True)
-    user_id_user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user_id_user = models.ForeignKey('User', on_delete=models.PROTECT)
     image_document      = models.ImageField(upload_to='imgDocs',max_length=255)
     isdocument_vehicle  = models.BooleanField()
     isverified_document = models.BooleanField()
@@ -70,7 +70,7 @@ class Document(models.Model):
 
 class Mander(models.Model):
     id_mander           = models.AutoField(primary_key=True)
-    user_id_user        = models.ForeignKey('User', on_delete=models.CASCADE, unique=True)
+    user_id_user        = models.ForeignKey('User', on_delete=models.PROTECT, unique=True)
     image_mander        = models.ImageField (upload_to='imgMander',max_length=255, null=False)
     ishavecar_mander    = models.BooleanField()
     ishavemoto_mander   = models.BooleanField()
@@ -79,7 +79,7 @@ class Mander(models.Model):
     dateregister_mander = models.DateTimeField(auto_now_add=True)
     dateupdate_mander   = models.DateTimeField(auto_now=True)
     address_mander      = models.CharField(max_length=100)
-    cc_mander           = models.CharField(max_length=13)
+    cc_mander           = models.CharField(max_length=13, unique=True)
 
     class Meta:
         db_table = 'mander'
@@ -98,8 +98,8 @@ class Service(models.Model):
 
 class Request(models.Model):
     id_request         = models.AutoField(primary_key=True)
-    service_id_service = models.ForeignKey('Service', on_delete=models.CASCADE)
-    user_id_user       = models.ForeignKey('User', on_delete=models.CASCADE)
+    service_id_service = models.ForeignKey('Service', on_delete=models.PROTECT)
+    user_id_user       = models.ForeignKey('User', on_delete=models.PROTECT)
     detail_request     = models.CharField(max_length=255)
 
     STATUS_CHOICES = [
@@ -121,9 +121,9 @@ class Request(models.Model):
 
 class Requestmanager(models.Model):
     id_requestmanager    = models.AutoField(primary_key=True)
-    request_id_request   = models.ForeignKey('Request', on_delete=models.CASCADE, unique=True)
+    request_id_request   = models.ForeignKey('Request', on_delete=models.PROTECT, unique=True)
     image_requestmanager = models.ImageField(upload_to='imgRequestmanager',max_length=255,null=True,blank=True)
-    mander_id_mander     = models.ForeignKey('Mander', on_delete=models.CASCADE)
+    mander_id_mander     = models.ForeignKey('Mander', on_delete=models.PROTECT)
 
     STATUS_CHOICES = [
         ('espera', 'En espera'),
@@ -142,11 +142,11 @@ class Requestmanager(models.Model):
 
 class Vehicle(models.Model):
     id_vehicle          = models.AutoField(primary_key=True)
-    user_id_user = models.ForeignKey('User', on_delete=models.CASCADE)
-    image_vehicle       = models.ImageField(upload_to='imgVehicles', max_length=255, null=False)
+    user_id_user = models.ForeignKey('User', on_delete=models.PROTECT)
+    image_vehicle       = models.ImageField(upload_to='imgVehicles', max_length=255, null=True)
     brand_vehicle       = models.CharField(max_length=20)
-    plate_vehicle       = models.CharField(max_length=10)
-    model_vehicle       = models.SmallIntegerField()
+    plate_vehicle       = models.CharField(max_length=10, unique=True)
+    model_vehicle       = models.CharField(max_length=4)
     color_vehicle       = models.CharField(max_length=45)
 
     VEHICLE_TYPE_CHOICES = [
