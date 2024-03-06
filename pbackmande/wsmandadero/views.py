@@ -2,12 +2,38 @@ from .models import *
 from .serializers import *
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-
+from rest_framework.decorators import api_view
 
 
 # Create your views here.
+
+@api_view(['GET'])
+def estadisticas(request):
+    # Calcular la cantidad total de cada modelo
+    total_users = User.objects.count()
+    total_manders = Mander.objects.count()
+    total_requests = Request.objects.count()
+
+    # Calcular la cantidad de solicitudes con diferentes estados
+    pending_requests = Request.objects.filter(status_request='Pendiente').count()
+    processing_requests = Request.objects.filter(status_request='Proceso').count()
+    finished_requests = Request.objects.filter(status_request='Finalizado').count()
+
+    # Calcular la cantidad de manders activos
+    active_manders = Mander.objects.filter(isactive_mander=True).count()
+
+    # Crear el diccionario de estadísticas
+    statistics = {
+        'total_users': total_users,
+        'total_manders': total_manders,
+        'total_requests': total_requests,
+        'pending_requests': pending_requests,
+        'processing_requests': processing_requests,
+        'finished_requests': finished_requests,
+        'active_manders': active_manders,
+    }
+
+    return Response(statistics)    
 
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()
