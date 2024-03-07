@@ -91,8 +91,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbmandaderoapp',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'cardashan',
+        'PASSWORD': 'cardashan',
         'HOST': '127.0.0.1',
         'PORT':'3306',
     },
