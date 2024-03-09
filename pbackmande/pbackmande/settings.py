@@ -94,7 +94,7 @@ DATABASES = {
     'NAME': 'dbmandaderoapp',
     'USER': 'cgrzdtdtse',
     'PASSWORD': 'LJ15X6UHNJ873XOH$',
-    'HOST': 'dbmanders',
+    'HOST': 'dbmanders.postgres.database.azure.com',
     'PORT': '5432',
     'OPTIONS': {
       'sslmode': 'require',
