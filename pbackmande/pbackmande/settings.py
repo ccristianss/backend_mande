@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,22 +89,17 @@ WSGI_APPLICATION = 'pbackmande.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbmandaderoapp',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT':'3306',
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'dbmandaderoapp',
+    'USER': 'devingworld',
+    'PASSWORD': 'XcQkRjLd32mH',
+    'HOST': 'ep-yellow-brook-a5cprtww.us-east-2.aws.neon.tech',
+    'PORT': '5432',
+    'OPTIONS': {
+      'sslmode': 'require',
     },
-    #"default": {
-    #    "ENGINE": "django.db.backends.postgresql",
-    #    "NAME": "dbmanders",
-    #    "USER": "iovwkaaltg",
-    #    "PASSWORD": "852XS077342KV108$",
-    #    "HOST": "backmanders",
-    #    "PORT": "",
-    #}
+  }
 }
 
 #
