@@ -30,10 +30,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r pbackmande/requirements.txt
-          ls -R
+#          ls -R
 
-          - name: Zip artifact for deployment
-          run: zip -r release.zip backmande pbackmande
+      - name: Zip artifact for deployment
+        run: zip -r release.zip backmande pbackmande
   
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
