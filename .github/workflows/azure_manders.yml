@@ -33,14 +33,12 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Migrate database
-        run: |
-          source backmande/bin/activate
-          python pbackmande/manage.py migrate
+        run: python pbackmande/manage.py makemigrations
+      - name: Migrate database
+        run: python pbackmande/manage.py migrate
 
       - name: Start Django development server
-        run: |
-          source backmande/bin/activate
-          python pbackmande/manage.py runserver
+        run: python pbackmande/manage.py runserver
 
   deploy:
     runs-on: ubuntu-latest
