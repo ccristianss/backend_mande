@@ -24,16 +24,16 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python -m venv venv
-          source venv/bin/activate
+          python -m venv backmande
+          source backmande/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r pbackmande/requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip release.zip pbackmande/* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
@@ -64,6 +64,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'manders'
+          app-name: 'backmande'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9096D99FC0684EF9A9DB02CD43C3A88F }}
