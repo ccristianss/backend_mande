@@ -92,9 +92,9 @@ DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'dbmandaderoapp',
-    'USER': 'devingworld',
-    'PASSWORD': 'XcQkRjLd32mH',
-    'HOST': 'ep-yellow-brook-a5cprtww.us-east-2.aws.neon.tech',
+    'USER': 'cgrzdtdtse',
+    'PASSWORD': 'LJ15X6UHNJ873XOH$',
+    'HOST': 'dbmanders',
     'PORT': '5432',
     'OPTIONS': {
       'sslmode': 'require',
