@@ -32,10 +32,10 @@ jobs:
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
-      - name: Migrate database
-        run: python pbackmande/manage.py makemigrations
-      - name: Migrate database
-        run: python pbackmande/manage.py migrate
+#      - name: Migrate database
+#        run: python pbackmande/manage.py makemigrations
+#      - name: Migrate database
+#        run: python pbackmande/manage.py migrate
 
       - name: Start Django development server
         run: python pbackmande/manage.py runserver
