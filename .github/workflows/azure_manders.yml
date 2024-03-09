@@ -34,12 +34,12 @@ jobs:
 
       - name: Migrate database
         run: |
-          source venv/bin/activate
+          source backmande/bin/activate
           python pbackmande/manage.py migrate
 
       - name: Start Django development server
         run: |
-          source venv/bin/activate
+          source backmande/bin/activate
           python pbackmande/manage.py runserver
 
   deploy:
