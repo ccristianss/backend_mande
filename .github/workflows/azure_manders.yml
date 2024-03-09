@@ -37,8 +37,8 @@ jobs:
 #      - name: Migrate database
 #        run: python pbackmande/manage.py migrate
 
-      - name: Start Django development server
-        run: python pbackmande/manage.py runserver
+#      - name: Start Django development server
+#        run: python pbackmande/manage.py runserver
 
   deploy:
     runs-on: ubuntu-latest
